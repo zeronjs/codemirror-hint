@@ -23,7 +23,7 @@
 
     if (!/^[\w$_]*$/.test(token.string)) {
         token = tprop = {start: cur.ch, end: cur.ch, string: "", state: token.state,
-                         className: token.string == ":" ? "python-type" : null};
+                         className: token.string == ":" ? "clike-type" : null};
     }
 
     if (!context) var context = [];
@@ -37,27 +37,19 @@
             to: CodeMirror.Pos(cur.line, token.end)};
   }
 
-  function pythonHint(editor) {
-    return scriptHint(editor, pythonKeywordsU, function (e, cur) {return e.getTokenAt(cur);});
+  function clikeHint(editor) {
+    return scriptHint(editor, clikeKeywordsU, function (e, cur) {return e.getTokenAt(cur);});
   }
-  CodeMirror.pythonHint = pythonHint; // deprecated
-  CodeMirror.registerHelper("hint", "python", pythonHint);
+  CodeMirror.clikeHint = clikeHint; // deprecated
+  CodeMirror.registerHelper("hint", "clike", clikeHint);
 
-  var pythonKeywords = "and del from not while as elif global or with assert else if pass yield"
-+ "break except import print class exec in raise continue finally is return def for lambda try";
-  var pythonKeywordsL = pythonKeywords.split(" ");
-  var pythonKeywordsU = pythonKeywords.toUpperCase().split(" ");
-
-  var pythonBuiltins = "abs divmod input open staticmethod all enumerate int ord str "
-+ "any eval isinstance pow sum basestring execfile issubclass print super"
-+ "bin file iter property tuple bool filter len range type"
-+ "bytearray float list raw_input unichr callable format locals reduce unicode"
-+ "chr frozenset long reload vars classmethod getattr map repr xrange"
-+ "cmp globals max reversed zip compile hasattr memoryview round __import__"
-+ "complex hash min set apply delattr help next setattr buffer"
-+ "dict hex object slice coerce dir id oct sorted intern ";
-  var pythonBuiltinsL = pythonBuiltins.split(" ").join("() ").split(" ");
-  var pythonBuiltinsU = pythonBuiltins.toUpperCase().split(" ").join("() ").split(" ");
+  var clikeKeywords = "and as assert async await break class continue def del elif else except finally for from global if import in is lambda nonlocal|10 not or pass raise return try while with yield __import__ abs all any ascii bin bool breakpoint bytearray bytes callable chr classmethod compile complex delattr dict dir divmod enumerate eval exec filter float format frozenset getattr globals hasattr hash help hex id input int isinstance issubclass iter len list locals map max memoryview min next object oct open ord pow print property range repr reversed round set setattr slice sorted staticmethod str sum super tuple type vars zip";
+ var clikeKeywordsL = clikeKeywords.split(" ");
+ var clikeKeywordsU =""; //clikeKeywords.toUpperCase().split(" ");
+//keyword co dau () dang sau 
+var clikeBuiltins = "";
+  var clikeBuiltinsL = clikeBuiltins.split(" ").join("() ").split(" ");
+  var clikeBuiltinsU = clikeBuiltins.toUpperCase().split(" ").join("() ").split(" ");
 
   function getCompletions(token, context) {
     var found = [], start = token.string;
@@ -66,10 +58,10 @@
     }
 
     function gatherCompletions(_obj) {
-        forEach(pythonBuiltinsL, maybeAdd);
-        forEach(pythonBuiltinsU, maybeAdd);
-        forEach(pythonKeywordsL, maybeAdd);
-        forEach(pythonKeywordsU, maybeAdd);
+        forEach(clikeBuiltinsL, maybeAdd);
+        forEach(clikeBuiltinsU, maybeAdd);
+        forEach(clikeKeywordsL, maybeAdd);
+        forEach(clikeKeywordsU, maybeAdd);
     }
 
     if (context) {
