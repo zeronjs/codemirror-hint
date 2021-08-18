@@ -23,7 +23,7 @@
 
     if (!/^[\w$_]*$/.test(token.string)) {
         token = tprop = {start: cur.ch, end: cur.ch, string: "", state: token.state,
-                         className: token.string == ":" ? "clike-type" : null};
+                         className: token.string == ":" ? "python-type" : null};
     }
 
     if (!context) var context = [];
@@ -37,19 +37,19 @@
             to: CodeMirror.Pos(cur.line, token.end)};
   }
 
-  function clikeHint(editor) {
-    return scriptHint(editor, clikeKeywordsU, function (e, cur) {return e.getTokenAt(cur);});
+  function pythonHint(editor) {
+    return scriptHint(editor, pythonKeywordsU, function (e, cur) {return e.getTokenAt(cur);});
   }
-  CodeMirror.clikeHint = clikeHint; // deprecated
-  CodeMirror.registerHelper("hint", "clike", clikeHint);
+  CodeMirror.pythonHint = pythonHint; // deprecated
+  CodeMirror.registerHelper("hint", "python", pythonHint);
 
-  var clikeKeywords = "and as assert async await break class continue def del elif else except finally for from global if import in is lambda nonlocal|10 not or pass raise return try while with yield __import__ abs all any ascii bin bool breakpoint bytearray bytes callable chr classmethod compile complex delattr dict dir divmod enumerate eval exec filter float format frozenset getattr globals hasattr hash help hex id input int isinstance issubclass iter len list locals map max memoryview min next object oct open ord pow print property range repr reversed round set setattr slice sorted staticmethod str sum super tuple type vars zip";
- var clikeKeywordsL = clikeKeywords.split(" ");
- var clikeKeywordsU =""; //clikeKeywords.toUpperCase().split(" ");
+  var pythonKeywords = "and as assert async await break class continue def del elif else except finally for from global if import in is lambda nonlocal|10 not or pass raise return try while with yield __import__ abs all any ascii bin bool breakpoint bytearray bytes callable chr classmethod compile complex delattr dict dir divmod enumerate eval exec filter float format frozenset getattr globals hasattr hash help hex id input int isinstance issubclass iter len list locals map max memoryview min next object oct open ord pow print property range repr reversed round set setattr slice sorted staticmethod str sum super tuple type vars zip";
+ var pythonKeywordsL = pythonKeywords.split(" ");
+ var pythonKeywordsU =""; //pythonKeywords.toUpperCase().split(" ");
 //keyword co dau () dang sau 
-var clikeBuiltins = "";
-  var clikeBuiltinsL = clikeBuiltins.split(" ").join("() ").split(" ");
-  var clikeBuiltinsU = clikeBuiltins.toUpperCase().split(" ").join("() ").split(" ");
+var pythonBuiltins = "";
+  var pythonBuiltinsL = pythonBuiltins.split(" ").join("() ").split(" ");
+  var pythonBuiltinsU = pythonBuiltins.toUpperCase().split(" ").join("() ").split(" ");
 
   function getCompletions(token, context) {
     var found = [], start = token.string;
@@ -58,10 +58,10 @@ var clikeBuiltins = "";
     }
 
     function gatherCompletions(_obj) {
-        forEach(clikeBuiltinsL, maybeAdd);
-        forEach(clikeBuiltinsU, maybeAdd);
-        forEach(clikeKeywordsL, maybeAdd);
-        forEach(clikeKeywordsU, maybeAdd);
+        forEach(pythonBuiltinsL, maybeAdd);
+        forEach(pythonBuiltinsU, maybeAdd);
+        forEach(pythonKeywordsL, maybeAdd);
+        forEach(pythonKeywordsU, maybeAdd);
     }
 
     if (context) {
