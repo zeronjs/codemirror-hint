@@ -43,12 +43,19 @@
   CodeMirror.pythonHint = pythonHint; // deprecated
   CodeMirror.registerHelper("hint", "python", pythonHint);
 
-  var pythonKeywords = "and as assert async await break class continue def del elif else except finally for from global if import in is lambda nonlocal|10 not or pass raise return try while with yield __import__ abs all any ascii bin bool breakpoint bytearray bytes callable chr classmethod compile complex delattr dict dir divmod enumerate eval exec filter float format frozenset getattr globals hasattr hash help hex id input int isinstance issubclass iter len list locals map max memoryview min next object oct open ord pow print property range repr reversed round set setattr slice sorted staticmethod str sum super tuple type vars zip __debug__ Ellipsis False None NotImplemented True Any Callable Coroutine Dict List Literal Generic Optional Sequence Set Tuple Type Union "
-;
- var pythonKeywordsL = pythonKeywords.split(" ");
- var pythonKeywordsU =""; //pythonKeywords.toUpperCase().split(" ");
-//keyword co dau () dang sau 
-var pythonBuiltins = "";
+  var pythonKeywords = "and del from not while as elif global or with assert else if pass yield"
++ "break except import print class exec in raise continue finally is return def for lambda try";
+  var pythonKeywordsL = pythonKeywords.split(" ");
+  var pythonKeywordsU = pythonKeywords.toUpperCase().split(" ");
+
+  var pythonBuiltins = "abs divmod input open staticmethod all enumerate int ord str "
++ "any eval isinstance pow sum basestring execfile issubclass print super"
++ "bin file iter property tuple bool filter len range type"
++ "bytearray float list raw_input unichr callable format locals reduce unicode"
++ "chr frozenset long reload vars classmethod getattr map repr xrange"
++ "cmp globals max reversed zip compile hasattr memoryview round __import__"
++ "complex hash min set apply delattr help next setattr buffer"
++ "dict hex object slice coerce dir id oct sorted intern ";
   var pythonBuiltinsL = pythonBuiltins.split(" ").join("() ").split(" ");
   var pythonBuiltinsU = pythonBuiltins.toUpperCase().split(" ").join("() ").split(" ");
 
