@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html >
+  <head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/mode-html.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/mode-javascript.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/theme-monokai.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/mode-css.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.js"></script>
+  </head>
+ <body style="background:black">
+   <div>
+     <button id="bhtml" onclick="fhtml()" style="background:black;color:red;width:20%">HTML</button>
+     <button id="bcss" onclick="fcss()" style="background:black;color:blue;width:15%">CSS</button>
+     <button id="bjs" onclick="fjs()" style="background:black;color:blue;width:10%">JS</button>
+     <button onclick="result()"style="width:20%;background:black;color:yellow">RESULT</button>
+     <button onclick="full()"style="display:none;position: absolute;width:20%;top:0;right:0;color:green;font-size:10px;green;background:black" id ="ff">full screen</button>
+  </div>
+<div id="html"style="width:100%;height:100vh;" onkeyup="run()"></div>
+<div id="css"style="width:100%;height:100vh;display:none"onkeyup="run()"></div>
+<div id="js"style="width:100%;height:100vh;display:none" onkeyup="run()"></div>
+
+   <script>
+   
+   var htmlv,cssv,jsv="";
+var iframe = document.createElement('iframe');var value="";
+document.body.appendChild(iframe);
+iframe.style.height="50vh";
+iframe.style.width="100%";
+iframe.style.display="none";
+iframe.style.background="white"
+  function run(){
+    htmlv= editor1.getValue();
+    cssv=editor2.getValue();
+    jsv= editor3.getValue();
+ value = htmlv+"<style>"+cssv+"</style>"+"<script>"+jsv+"</script"+">";
+
+iframe.contentWindow.document.open();
+iframe.contentWindow.document.write(value);
+iframe.contentWindow.document.close();}
+function result(){
+  if (iframe.style.display=="none"){
+    iframe.style.display="block";
+    html.style.height="50vh";
+    js.style.height="50vh";
+   css.style.height="50vh";
+   ff.style.display="block"
+  }else{
+iframe.style.display="none";
+    html.style.height="100vh";
+    css.style.height="100vh";
+    js.style.height="100vh";
+    ff.style.display="none";
+  }
+}
+function fcss(){
+  html.style.display="none";
+  js.style.display="none";
+  css.style.display="block";
+ bcss.style.color="red";
+ bjs.style.color="blue";
+ bhtml.style.color="blue";
+  }
+function fhtml(){
+  html.style.display="block";
+  js.style.display="none";
+  css.style.display="none";
+ bhtml.style.color="red";
+ bcss.style.color="blue";
+ bjs.style.color="blue";
+  }
+function fjs(){
+  html.style.display="none";
+  js.style.display="block";
+  css.style.display="none";
+ bjs.style.color="red";
+ bcss.style.color="blue";
+ bhtml.style.color="blue";
+  }
+  function full(){
+    if (iframe.style.height=="50vh"){
+      html.style.display="none";
+      css.style.display="none";
+      js.style.display="none";
+iframe.style.height="100vh";
+    }else{
+html.style.display="block";
+      css.style.display="none";
+      js.style.display="none";
+iframe.style.height="50vh";
+    }
+  }
+  
+   </script>
+   <script>
+  ace.require("ace/ext/language_tools");
+    var editor1 = ace.edit("html");
+    editor1.session.setMode("ace/mode/html");
+    editor1.setTheme("ace/theme/monokai");
+    // enable autocompletion and snippets
+    editor1.setOptions({
+
+        
+        enableLiveAutocompletion: true
+    });
+var editor2 = ace.edit("css");
+    editor2.session.setMode("ace/mode/css");
+    editor2.setTheme("ace/theme/monokai");
+    // enable autocompletion and snippets
+    editor2.setOptions({
+
+        
+        enableLiveAutocompletion: true
+    });
+var editor3 = ace.edit("js");
+    editor3.session.setMode("ace/mode/javascript");
+    editor3.setTheme("ace/theme/monokai");
+    // enable autocompletion and snippets
+    editor3.setOptions({
+
+      
+        enableLiveAutocompletion: true
+    });
+
+
+
+    
+   </script>
+ </body>
+</html>
